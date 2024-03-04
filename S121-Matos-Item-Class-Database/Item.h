@@ -12,17 +12,23 @@ private:
     string id;
     string name;
     double price;
+    string* supplier;
+
+    static int counter;
+
+
+
     string titleCaps(string nameValue)
     {
-        if (nameValue.size() == 0) return "";
+        //if (nameValue.size() == 0) return "";
 
-        char previous = ' ';
-        for (int i = 0; i < nameValue.size(); i++) {
-            char c = tolower(nameValue[i]);
-            if (previous == ' ') c = toupper(c);
-            nameValue[i] = c;
-            previous = c;
-        }
+        //char previous = ' ';
+        //for (int i = 0; i < nameValue.size(); i++) {
+        //    char c = tolower(nameValue[i]);
+        //    if (previous == ' ') c = toupper(c);
+        //    nameValue[i] = c;
+        //    previous = c;
+        //}
 
         return nameValue;
     }
@@ -42,26 +48,49 @@ public:
         price = abs(priceValue);
     }
 
+    void setSupplier(string supplierName)
+    {
+        *supplier = supplierName;
+    }
 
     //Accessors
-    string getId()    { return id; }
-    string getName()  { return name; }
-    double getPrice() { return price; }
+    string getId() const { return id; }
+    string getName() const  { return name; }
+    double getPrice() const { return price; }
+    string getSupplier() const { return *supplier; }
 
-    ////Constructors
-    //Zero-Arguments
-    Item() {
-        setId("NA");
-        setName("NA");
-        setPrice(0);
-    }
+    static int getCounter() { return counter; }
+
      
     //All-Arguments constructor
-    Item(string idValue, string nameValue, double priceValue)
+    Item(string idValue = "X0000", 
+        string nameValue = "NA", 
+        double priceValue = 0,
+        string supplierValue = "COSTCO")
     {
         setId(idValue);
         setName(nameValue);
         setPrice(priceValue);
+        
+        supplier = new string();
+        *supplier = supplierValue;
+
+        counter++;              //one more object made!
+    }
+
+    //Version2 - Copy Constructor---------------------------------------
+    Item(const Item& sourceItem)
+    {
+        *this = sourceItem;
+        counter++;              //one more object made!
+    }
+
+    ~Item()
+    {
+        //cout << "+++ " << toString() << endl;
+        //cout << "+++ " << supplier << " " << *supplier << endl;
+        delete supplier;
+        counter--;
     }
 
     //User-Defined Methods
@@ -69,9 +98,41 @@ public:
         stringstream sout;
         sout << this << " Item [ ID: " << getId()
             << ", Name: " << getName()
-            << ", Price: " << getPrice() << "]";
+            << ", Price: " << getPrice() 
+            << ", supplier PTR: " << supplier 
+            << ", Supplier: " << getSupplier() << "]";
         return sout.str();
     }
 
+
+    //Operator Overloading
+    void operator= (const Item& other)
+    {
+        setId(other.getId());
+        setName(other.getName());
+        setPrice(other.getPrice());
+
+        supplier = new string();
+        *supplier = other.getSupplier();
+    }
+
+    friend void talk(const Item& i)
+    {
+        cout << "\n FRIEND==> " << i.id << ", "
+            << i.getName() << ", " << i.getPrice() << ", "
+            << i.getSupplier() << endl;
+    }
+
+    friend ostream& operator<< (ostream& sout, const Item& i) {
+        sout << &i  << " Item [ ID: " << i.id
+            << ", Name: " << i.name
+            << ", Price: " << i.getPrice()
+            << ", supplier PTR: " << i.supplier
+            << ", Supplier: " << i.getSupplier() << "]";
+        return sout;
+    }
 };
+
+//Initialization of static data members
+int Item::counter = 0;
 
