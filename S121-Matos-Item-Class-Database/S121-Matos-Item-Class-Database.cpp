@@ -34,6 +34,11 @@ void experiment04() {
     talk(i1);                                //using a friend
     cout << "i1 " << i1 << endl;
 
+    //Data acquisition
+    Item i2;
+    cin >> i2;
+    cout << "\ni2 " << i2.toString() << endl;
+    cout << "\ni2 " << i2 << endl;
 }
 
 

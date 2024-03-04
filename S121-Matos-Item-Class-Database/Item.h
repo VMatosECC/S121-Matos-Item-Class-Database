@@ -131,6 +131,29 @@ public:
             << ", Supplier: " << i.getSupplier() << "]";
         return sout;
     }
+
+    friend istream& operator>> (istream& si, Item& i) {
+        cout << "Enter ID number:   ";
+        si >> i.id;
+
+        si.ignore();
+        cout << "Enter Name:        ";
+        //si >> i.name;   //ERROR!!!!
+        getline(si, i.name);
+
+        cout << "Enter Price:       ";
+        si >> i.price;
+
+        si.ignore();
+        cout << "Enter Supplier:    ";
+        string sdata;
+        //si >> sdata;
+        getline(si, sdata);
+        i.setSupplier(sdata);
+
+        return si;
+    }
+
 };
 
 //Initialization of static data members
