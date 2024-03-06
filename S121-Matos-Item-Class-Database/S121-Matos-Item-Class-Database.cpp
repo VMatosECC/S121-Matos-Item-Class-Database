@@ -23,9 +23,17 @@ int main()
 }
 //-------------------------------------------------
 void experiment05() {
-    Toy t1("T0123", "Lego", 20.00, "Amazon", "10+");
-    cout << "t1 " << t1.toString() << endl;
-    cout << "t1 " << t1 << endl;
+    try
+    {
+        Toy t1("T0123", "Lego", 20.00, "Amazon", "10+");
+        cout << "t1 " << t1.toString() << endl;
+        cout << "t1 " << t1 << endl;
+    }
+    catch (const std::exception& e)
+    {
+        cout << "ERROR - Object not created. " << e.what() << endl;
+    }
+    cout << "I'm alive!!!" << endl;
 }
 
 

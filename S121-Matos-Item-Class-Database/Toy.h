@@ -36,6 +36,8 @@ Toy::Toy(string id, string name, double price, string supplier,
     : Item(id, name, price, supplier)
 {
     setAgeRange(ageRange);
+    if (price > 15)
+        throw exception("TOY - Price exceeds $15 limit");
 }
 
 
