@@ -1,6 +1,7 @@
 // S121-Matos-Item-Class-Database.cpp 
 #pragma once
 #include "Item.h"
+#include "Toy.h"
 #include <vector>
 
 //Prototypes---------------------------------------
@@ -8,16 +9,28 @@ void experiment01();
 void experiment02();
 void experiment03();
 void experiment04();
+void experiment05();
 
 int main()
 {
     //experiment01();
     //experiment02();
     //experiment03();
-    experiment04();
+    //experiment04();
+    experiment05();
 
     cout << "All done!\n";
 }
+//-------------------------------------------------
+void experiment05() {
+    Toy t1("T0123", "Lego", 20.00, "Amazon", "10+");
+    cout << "t1 " << t1.toString() << endl;
+    cout << "t1 " << t1 << endl;
+}
+
+
+
+
 //-------------------------------------------------
 void experiment04() {
 

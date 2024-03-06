@@ -54,10 +54,10 @@ public:
     }
 
     //Accessors
-    string getId() const { return id; }
-    string getName() const  { return name; }
-    double getPrice() const { return price; }
-    string getSupplier() const { return *supplier; }
+    string getId()          const { return id; }
+    string getName()        const  { return name; }
+    double getPrice()       const { return price; }
+    string getSupplier()    const { return *supplier; }
 
     static int getCounter() { return counter; }
 
@@ -94,7 +94,7 @@ public:
     }
 
     //User-Defined Methods
-    string toString() {
+    string toString() const {
         stringstream sout;
         sout << this << " Item [ ID: " << getId()
             << ", Name: " << getName()
