@@ -2,6 +2,7 @@
 #pragma once
 #include "Item.h"
 #include "Toy.h"
+#include "Edible.h"
 #include <vector>
 
 //Prototypes---------------------------------------
@@ -10,6 +11,7 @@ void experiment02();
 void experiment03();
 void experiment04();
 void experiment05();
+void experiment06();
 
 int main()
 {
@@ -17,10 +19,30 @@ int main()
     //experiment02();
     //experiment03();
     //experiment04();
-    experiment05();
+    //experiment05();
+    experiment06();
 
     cout << "All done!\n";
 }
+//------------------------------------------------
+void experiment06() {
+
+    try
+    {
+        Edible e1("E1234", "Cobb Salad", 4.00, "Green Garden",
+            6000, "Lettuce, cabagge, carrots, eggs, ham, ranch dressing");
+
+        cout << "e1 " << e1 << endl;
+    }
+    catch (const std::exception& e)
+    {
+        cout << "ERROR - Edible object not created - " << e.what() << endl;
+    }
+
+    cout << "\nAll done!\n";
+}
+
+
 //-------------------------------------------------
 void experiment05() {
     try
